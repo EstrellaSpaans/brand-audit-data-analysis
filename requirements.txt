@@ -1,0 +1,5 @@
+html2text             # Converts HTML to Markdown text
+urllib3               # For handling URLs and making HTTP requests (imported as part of urllib.parse)
+requests              # Simplifies HTTP requests
+pandas                # Data manipulation and analysis
+beautifulsoup4        # Parses HTML and XML documents
