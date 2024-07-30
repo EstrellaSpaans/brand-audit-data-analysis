@@ -1,5 +1,5 @@
 def extract_urls_from_html(html_content, website):
-    """Extracts product URLs from the given HTML page with Shopify JSON-LD data or fallback to anchor tags."""
+    """Extracts URLs from the given HTML page and product urls if Shopify JSON-LD data is present."""
     
     urls = []
 
