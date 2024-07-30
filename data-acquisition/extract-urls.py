@@ -1,5 +1,5 @@
-def extract_urls_from_html(html_content, website):
-    """Extracts URLs from the given HTML page and product urls if Shopify JSON-LD data is present."""
+def extract_urls(html_content, website):
+    """Extracts product URLs from the given HTML page with Shopify JSON-LD data or fallback to anchor tags."""
     
     urls = []
 
@@ -13,22 +13,26 @@ def extract_urls_from_html(html_content, website):
         if 'mainEntity' in json_data:
             main_entity = json_data['mainEntity']
             
-            # Determine URL extraction logic based on website
-            if website == 'rarebeauty.com':
-                for item in main_entity["itemListElement"]:
-                    extracted_url = item["item"]["url"]
-                    url = '/products' + str(extracted_url).split('/products')[1]
-                    urls.append(url)
-            elif website == 'rembeauty.com':
-                for item in main_entity["itemListElement"]:
-                    extracted_url = item["url"]
-                    url = '/products' + str(extracted_url).split('/products')[1]
-                    urls.append(url)
-            elif website == 'fentybeauty.com':
+            # Generic URL extraction logic based on common patterns
+            if isinstance(main_entity, list):
                 for item in main_entity:
-                    extracted_url = item['offers']['url']
-                    url = '/products' + str(extracted_url).split('/products')[1]
-                    urls.append(url)
+                    if 'itemListElement' in item:
+                        for sub_item in item['itemListElement']:
+                            extracted_url = sub_item.get("url") or sub_item["item"].get("url")
+                            if extracted_url:
+                                url = '/products' + str(extracted_url).split('/products')[1]
+                                urls.append(url)
+                    else:
+                        extracted_url = item.get('url') or item.get('offers', {}).get('url')
+                        if extracted_url:
+                            url = '/products' + str(extracted_url).split('/products')[1]
+                            urls.append(url)
+            else:
+                for item in main_entity.get("itemListElement", []):
+                    extracted_url = item.get("url") or item["item"].get("url")
+                    if extracted_url:
+                        url = '/products' + str(extracted_url).split('/products')[1]
+                        urls.append(url)
             return urls
 
     # If JSON-LD extraction fails or is not applicable, use alternative method
