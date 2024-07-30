@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
 def acquire_html(website_url):
     """
     Function to retrieve the HTML from website and turn it into a BeautifulSoup object"""   
