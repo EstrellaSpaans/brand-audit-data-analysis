@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
 def extract_shades(html_content):
     """Extract shade data from HTML content."""
     pattern = re.compile(r"'id': '([^']+)',\s*'name': '([^']+)',\s*'description': '([^']+)',\s*'handle': '([^']+)',\s*'hex': '([^']+)',\s*'category': '([^']+)'")
@@ -31,12 +25,6 @@ def validate_urls(url):
         # Log the error if needed
         print(f"Error checking URL {url}: {e}")
     return None  # Return None if the URL is invalid or an error occurred
-
-def generate_base_key(url):
-    """Generate a normalized base key by removing unwanted characters."""
-    # Use regex to remove unwanted parts of the URL
-    base_key = re.sub(r'[^a-zA-Z0-9-]', '', url)
-    return base_key
 
 def generate_all_urls(dataframe, url_list, target_counts):
     """Generate and validate all possible URLs for products that dont have S"""
@@ -102,4 +90,3 @@ def generate_all_urls(dataframe, url_list, target_counts):
             break
 
     return valid_urls
-
