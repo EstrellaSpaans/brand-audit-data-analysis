@@ -1,3 +1,6 @@
+from bs4 import BeautifulSoup
+import json
+
 def extract_urls(html_content, website):
     """Extracts product URLs from the given HTML page with Shopify JSON-LD data or fallback to anchor tags."""
     
