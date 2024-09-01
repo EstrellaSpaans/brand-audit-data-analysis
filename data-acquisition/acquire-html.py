@@ -1,3 +1,6 @@
+import requests
+from bs4 import BeautifulSoup
+
 def acquire_html(website_url):
     """
     Function to retrieve the HTML from website and turn it into a BeautifulSoup object"""   
