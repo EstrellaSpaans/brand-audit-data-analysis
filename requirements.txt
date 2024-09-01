@@ -1,5 +1,5 @@
-html2text             # Converts HTML to Markdown text
-urllib3               # For handling URLs and making HTTP requests (imported as part of urllib.parse)
-requests              # Simplifies HTTP requests
-pandas                # Data manipulation and analysis
-beautifulsoup4        # Parses HTML and XML documents
+pandas==1.5.3
+requests==2.28.1
+beautifulsoup4==4.11.1
+html2text==2020.1.16
+lxml==4.9.3
