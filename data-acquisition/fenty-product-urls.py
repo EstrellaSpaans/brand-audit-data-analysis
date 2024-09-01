@@ -243,3 +243,60 @@ def get_exact_number_matches(shades_dict, fenty_list):
     all_urls = list(set(all_matching_urls))  # Ensure URLs are unique
     
     return all_urls
+
+def generate_product_urls(fenty_products, fenty_shades):
+    # Initialize an empty list to store the product URLs
+    product_urls = []
+
+    # Iterate over each key-value pair in the fenty_products dictionary
+    for key, value in fenty_products.items():
+        
+        # Iterate over each URL in the list associated with the current key
+        for url in value:
+            # If there are multiple URLs, append the specific URL to the product URL
+            if len(value) > 1:
+                product_url = 'products/' + key + url
+            else:
+                # If there's only one URL, append just the key to the product URL
+                product_url = 'products/' + key
+            
+            # Add the generated product URL to the list
+            product_urls.append(product_url)
+
+        # Check if any item in the value list contains a digit and none of them ends with '-1'
+        if any(char.isdigit() for item in value for char in item) and not any(item.endswith('-1') for item in value):
+            # If the condition is met, get URLs with exact number matches
+            urls = get_exact_number_matches(fenty_shades, fenty_products[key])
+        else:
+            # Otherwise, get the group with the most matches
+            urls = get_group_with_most_matches(fenty_shades, fenty_products[key])
+
+        # Iterate over the URLs returned by the matching functions
+        for url in urls:
+            product_url = 'products/' + key + url  # Generate the product URL
+            full_url = key + url  # Generate the full URL
+
+            # Ensure value is a list and not empty before proceeding
+            if value:
+                # If the full URL is not already in the value list
+                if full_url not in value:
+                    # Validate the URL using the validate_urls function
+                    validated_url = validate_urls('fentybeauty.com/products/' + full_url)
+
+                    # If validation fails, try appending '-1' to the URL and validate again
+                    if validated_url is None:
+                        validated_url = validate_urls('fentybeauty.com/products/' + full_url + '-1')
+
+                        # If validation passes, add the product URL to the list
+                        if validated_url is not None:
+                            product_urls.append(product_url)
+                    else:
+                        # If initial validation passes, add the product URL to the list
+                        product_urls.append(product_url)
+            else:
+                # If value is empty, add just the key-based product URL to the list
+                product_url = 'products/' + key
+                product_urls.append(product_url)
+
+    # Return the list of generated product URLs
+    return product_urls
