@@ -9,7 +9,7 @@ def load_data(file_path, file_type='csv'):
     else:
         raise ValueError("file_type must be either 'csv' or 'excel'")
 
-def save__data(brands, filename='data', file_type='csv'):
+def save_data(brands, filename='data', file_type='csv'):
     """
     Save brands DataFrame to a CSV or Excel file.
     """
