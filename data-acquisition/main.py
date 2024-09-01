@@ -31,7 +31,7 @@ def main():
     brands['product_urls'] = brands.apply(
         lambda row: product_urls if row['brand'] == 'Fenty Beauty' else row['product_urls'], axis=1)
     
-    save_data(brands, filename='data/brand_website_urls', file_type='xlsx')  # Corrected closing
+    save_data(brands, filename='data/brand_website_urls', file_type='xlsx')
 
 if __name__ == "__main__":
     main()
