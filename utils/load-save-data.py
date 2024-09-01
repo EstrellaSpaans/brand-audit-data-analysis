@@ -1,6 +1,6 @@
 def load_data(file_path, file_type='csv'):
     """
-    Load brands data from a CSV or Excel file.
+    Load dataframe from a CSV or Excel file.
     """
     if file_type == 'csv':
         return pd.read_csv(file_path)
@@ -9,13 +9,13 @@ def load_data(file_path, file_type='csv'):
     else:
         raise ValueError("file_type must be either 'csv' or 'excel'")
 
-def save_data(dataframe, filename='data', file_type='csv'):
+def save_data(df, filename='data', file_type='csv'):
     """
-    Save brands DataFrame to a CSV or Excel file.
+    Save DataFrame to a CSV or Excel file.
     """
     if file_type == 'csv':
-        brands.to_csv(f'{filename}.csv', index=False)
+        df.to_csv(f'{filename}.csv', index=False)
     elif file_type == 'excel':
-        brands.to_excel(f'{filename}.xlsx', index=False)
+        dr.to_excel(f'{filename}.xlsx', index=False)
     else:
         raise ValueError("file_type must be either 'csv' or 'excel'")
