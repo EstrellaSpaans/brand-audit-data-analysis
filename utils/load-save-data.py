@@ -1,4 +1,4 @@
-def load_brands_data(file_path, file_type='csv'):
+def load_data(file_path, file_type='csv'):
     """
     Load brands data from a CSV or Excel file.
     """
@@ -9,7 +9,7 @@ def load_brands_data(file_path, file_type='csv'):
     else:
         raise ValueError("file_type must be either 'csv' or 'excel'")
 
-def save_brands_data(brands, filename='general_brand_data', file_type='csv'):
+def save__data(brands, filename='data', file_type='csv'):
     """
     Save brands DataFrame to a CSV or Excel file.
     """
